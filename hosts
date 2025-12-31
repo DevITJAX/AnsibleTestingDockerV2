@@ -1,0 +1,17 @@
+# Ansible inventory for Docker-based lab
+# SSH credentials: root / vagrant
+
+[database]
+db01 ansible_host=192.168.100.20
+
+[webservers]
+web01 ansible_host=192.168.100.21
+web02 ansible_host=192.168.100.22
+
+[loadbalancers]
+loadbalancer ansible_host=192.168.100.30
+
+[all:vars]
+ansible_user=root
+ansible_password=vagrant
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'

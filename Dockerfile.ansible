@@ -1,0 +1,20 @@
+FROM geerlingguy/docker-ubuntu2204-ansible
+
+# Prevent interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Paris
+
+# Install Ansible and sshpass (non-interactive)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends ansible sshpass openssh-client && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Generate SSH key
+RUN ssh-keygen -t rsa -b 2048 -f /root/.ssh/id_rsa -N ""
+
+# Create ansible directory
+RUN mkdir -p /etc/ansible
+
+WORKDIR .
+
+CMD ["/bin/bash"]
