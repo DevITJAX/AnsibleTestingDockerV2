@@ -15,6 +15,7 @@ services:
     volumes:
       - ./ansible-scenario2:/ansible-scenario2
       - ./ansible-scenario3:/ansible-scenario3
+      - ./hosts:/etc/ansible/hosts
     tty: true
     stdin_open: true
     command: /bin/bash
