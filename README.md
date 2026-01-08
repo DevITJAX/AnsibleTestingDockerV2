@@ -77,8 +77,13 @@ docker-compose down
 ├── docker-compose.yml    # Docker services configuration
 ├── Dockerfile.ansible    # Control node image with Ansible
 ├── hosts                 # Ansible inventory file
-├── ansible-scenario2/    # Ansible playbooks (mounted to /ansible-scenario2)
-├── ansible-scenario3/    # Ansible playbooks (mounted to /ansible-scenario3)
+├── ansible-scenario1/    # Basic playbook examples
+├── ansible-scenario2/    # Playbook with variables
+├── ansible-scenario3/    # Playbook with handlers
+├── ansible-scenario4/    # Roles: apache2, nginx loadbalancer
+├── ansible-scenario5/    # Advanced scenario
+├── ansible-scenario6/    # Advanced scenario
+├── ansible-scenario7/    # Advanced scenario
 └── README.md
 ```
 
@@ -132,8 +137,18 @@ The following directories are mounted in the control node:
 |----------------|----------------|
 | `./ansible-scenario2/` | `/ansible-scenario2` |
 | `./ansible-scenario3/` | `/ansible-scenario3` |
+| `./ansible-scenario4/` | `/ansible-scenario4` |
 
 Add your playbooks to these directories — changes appear **instantly** without restarting!
+
+### Access the Load Balancer (Scenario 4)
+
+After running `playbook4.yml`, access the nginx load balancer at:
+
+- **http://localhost** (from host machine - port 80 is exposed)
+- **http://192.168.100.30** (from within Docker network)
+
+The load balancer proxies to web01 and web02 on port 8000.
 
 ## 🔄 When to Rebuild vs Restart
 
