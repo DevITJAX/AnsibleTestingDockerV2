@@ -11,7 +11,11 @@ web02 ansible_host=192.168.100.22
 [loadbalancers]
 loadbalancer ansible_host=192.168.100.30
 
+[proxy]
+loadbalancer ansible_host=192.168.100.30
+
 [all:vars]
 ansible_user=root
 ansible_password=vagrant
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+ansible_python_interpreter=/usr/bin/python3

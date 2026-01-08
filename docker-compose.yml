@@ -13,8 +13,13 @@ services:
       ansible_net:
         ipv4_address: 192.168.100.10
     volumes:
+      - ./ansible-scenario1:/ansible-scenario1
       - ./ansible-scenario2:/ansible-scenario2
       - ./ansible-scenario3:/ansible-scenario3
+      - ./ansible-scenario4:/ansible-scenario4
+      - ./ansible-scenario5:/ansible-scenario5
+      - ./ansible-scenario6:/ansible-scenario6
+      - ./ansible-scenario7:/ansible-scenario7
       - ./hosts:/etc/ansible/hosts
     tty: true
     stdin_open: true
@@ -30,12 +35,7 @@ services:
     tty: true
     stdin_open: true
     command: >
-      bash -c "apt-get update && apt-get install -y openssh-server python3 &&
-      mkdir -p /run/sshd &&
-      echo 'root:vagrant' | chpasswd &&
-      sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config &&
-      sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config &&
-      /usr/sbin/sshd -D"
+      bash -c "apt-get update && apt-get install -y openssh-server python3 && mkdir -p /run/sshd && echo 'root:vagrant' | chpasswd && sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config && sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config && /usr/sbin/sshd -D"
 
   web01:
     image: ubuntu:22.04
@@ -47,12 +47,7 @@ services:
     tty: true
     stdin_open: true
     command: >
-      bash -c "apt-get update && apt-get install -y openssh-server python3 &&
-      mkdir -p /run/sshd &&
-      echo 'root:vagrant' | chpasswd &&
-      sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config &&
-      sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config &&
-      /usr/sbin/sshd -D"
+      bash -c "apt-get update && apt-get install -y openssh-server python3 && mkdir -p /run/sshd && echo 'root:vagrant' | chpasswd && sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config && sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config && /usr/sbin/sshd -D"
 
   web02:
     image: ubuntu:22.04
@@ -64,29 +59,21 @@ services:
     tty: true
     stdin_open: true
     command: >
-      bash -c "apt-get update && apt-get install -y openssh-server python3 &&
-      mkdir -p /run/sshd &&
-      echo 'root:vagrant' | chpasswd &&
-      sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config &&
-      sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config &&
-      /usr/sbin/sshd -D"
+      bash -c "apt-get update && apt-get install -y openssh-server python3 && mkdir -p /run/sshd && echo 'root:vagrant' | chpasswd && sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config && sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config && /usr/sbin/sshd -D"
 
   loadbalancer:
     image: ubuntu:22.04
     container_name: loadbalancer
     hostname: loadbalancer
+    ports:
+      - "80:80"
     networks:
       ansible_net:
         ipv4_address: 192.168.100.30
     tty: true
     stdin_open: true
     command: >
-      bash -c "apt-get update && apt-get install -y openssh-server python3 &&
-      mkdir -p /run/sshd &&
-      echo 'root:vagrant' | chpasswd &&
-      sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config &&
-      sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config &&
-      /usr/sbin/sshd -D"
+      bash -c "apt-get update && apt-get install -y openssh-server python3 && mkdir -p /run/sshd && echo 'root:vagrant' | chpasswd && sed -i 's/#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config && sed -i 's/#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config && /usr/sbin/sshd -D"
 
 networks:
   ansible_net:
